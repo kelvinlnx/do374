@@ -1,0 +1,28 @@
+users:
+  albert:
+    age: 13
+    gender: m
+  julie:
+    age: 9
+    gender: f
+
+users.albert.age -----> 13
+
+users:
+  - name: julie
+    age: 123
+    gender: f
+  - name: albert
+    age: 123
+    gender: m
+
+users[1].age   -----> 123
+
+
+value1: 123
+
+message:
+  - hello world
+  - 2134
+  - 
+

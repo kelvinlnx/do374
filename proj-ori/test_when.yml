@@ -1,0 +1,28 @@
+- name: Testing When
+  hosts: nodes
+  tasks:
+    - block:
+        - name: "T1a: Only webserver members"
+          debug:
+            msg: Webserver operations
+    
+        - name: "T1b: Only webserver members"
+          debug:
+            msg: Webserver operations
+      when: inventory_hostname in groups['webservers']
+
+    - name: "T2: DBServers only"
+      debug:
+        msg: DB Server operations
+      when: inventory_hostname in groups['dbservers']
+
+    - name: "T3: Only in serverd"
+      set_fact:
+        value1: 123
+      when: inventory_hostname == "serverd"
+
+    - name: only display message if abc exists
+      debug:
+        msg: YAY!!! abc is {{ value1 }}
+      when: value1 is defined
+...

@@ -1,0 +1,26 @@
+{# This is my first jinja2 file #}
+Welcome to {{ ansible_facts['fqdn'] }}
+=====================================
+The value of value1 is {% if value1 == 'ansible' %}
+Ansible is GREAT
+{% else %}
+{{ value1 }}
+{% endif %}
+
+USERS
+=====
+{% for loop_item in user_names if loop_item != 'julie' %}
+{{ loop_item }}
+{% endfor %}
+
+[defaults]
+ip = {{ ansible_facts['all_ipv4_addresses'][0] }}
+
+Hello World
+
+The user_names variable in JSON is
+{{ user_names | to_nice_json }}
+
+The user_names in YAML is
+{{ user_names | to_nice_yaml }}
+

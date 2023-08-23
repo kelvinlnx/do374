@@ -1,0 +1,41 @@
+---
+- name: Testing handlers
+  hosts: servera
+  force_handlers: true
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+      changed_when: true
+      notify:
+        - H3
+
+    - name: T2
+      debug:
+        msg: Task 2
+      changed_when: true
+      notify:
+        - H1
+        - H3
+      failed_when: true
+
+    - name: T3
+      debug:
+        msg: Task 3
+      changed_when: true
+      notify:
+        - H2
+
+  handlers:
+    - name: H1
+      debug:
+        msg: Handler 1
+        
+    - name: H2
+      debug:
+        msg: Handler 2
+        
+    - name: H3
+      debug:
+        msg: Handler 3
+...

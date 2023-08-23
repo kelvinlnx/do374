@@ -1,0 +1,9 @@
+---
+- name: play 1
+  hosts: servera
+  tasks:
+    - name: T1
+      copy:
+        content: "{{ ansible_facts | to_nice_yaml }}"
+        dest: dummy.yaml
+      delegate_to: localhost

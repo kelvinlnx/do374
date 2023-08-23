@@ -1,0 +1,9 @@
+---
+- name: Testing Ansible Vault
+  hosts: servera
+  vars_files:
+    - vars/my_secret
+  tasks:
+    - name: T1
+      debug:
+        msg: username is {{ username }} password is {{ password }}

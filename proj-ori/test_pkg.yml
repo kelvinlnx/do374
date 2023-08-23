@@ -1,0 +1,17 @@
+---
+- name: Installing Software
+  hosts: servera
+  vars:
+    value1: Hello World
+    pkg_name: httpd
+  tasks:
+    - name: Install {{ pkg_name }} package
+      debug:
+        msg: Installing {{ pkg_name }}
+      vars:
+        pkg_name: HACKED
+
+    - name: Starting Service
+      debug:
+        msg: "{{ pkg_name }} will be started"
+...

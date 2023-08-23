@@ -1,0 +1,12 @@
+monkey		ansible_host=servera.lab.example.com
+
+[webservers]
+servera
+serverb
+
+[dbservers]
+server[c:d]
+
+[nodes:children]
+webservers
+dbservers

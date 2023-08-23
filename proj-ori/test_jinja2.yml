@@ -1,0 +1,23 @@
+---
+- name: Testing Jinja2
+  hosts: servera
+  vars:
+    value1: HELLO WORLD
+    user_names:
+      - albert
+      - julie
+      - mike
+  tasks:
+    - name: Copy template over to servera
+      template:
+        src: templates/dummy.j2
+        dest: ./dummy.cfg
+
+    - name: Get file contents
+      command: cat dummy.cfg
+      register: cmd_result
+
+    - name: Display result
+      debug:
+        msg: "{{ cmd_result.stdout_lines }}"
+...

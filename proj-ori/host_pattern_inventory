@@ -1,0 +1,12 @@
+four
+
+[A]
+one
+two
+
+[B]
+two
+three
+
+[all:vars]
+ansible_host=localhost

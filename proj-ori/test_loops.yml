@@ -1,0 +1,42 @@
+---
+- name: Testing Loop
+  hosts: webservers
+  tasks:
+    - name: T1
+      debug:
+        msg: Item is {{ item }}
+      loop:
+        - Task 1a
+        - Task 1b
+
+    # when the module option accepts list, it's better to use it than to use loop
+    - name: T2
+      debug:
+        msg:
+          - Task 2a
+          - Task 2b
+
+    - name: "T3: loop with complex structures"
+      debug:
+        msg: "{{ item.name }} is {{ item.age }} years old"
+      loop:
+        - name: one
+          age: 123
+        - name: two
+          age: 5
+        - name: three
+          age: 10
+
+    - name: "T4: same as T3"
+      vars:
+        data:
+          - name: one
+            age: 123
+          - name: two
+            age: 5
+          - name: three
+            age: 10
+      debug:
+        msg: "{{ item.name }} is {{ item.age }} years old"
+      loop: "{{ data }}"
+...

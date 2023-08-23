@@ -1,0 +1,17 @@
+- name: Display Public info
+  debug:
+    msg: You are {{ username }}
+
+- name: Private data
+  debug:
+    msg: Private info internal use -> {{ private_value }}
+
+- name: Copying File
+  copy:
+    src: role.txt
+    dest: ./role.txt
+
+- name: using template
+  template:
+    src: role.j2
+    dest: ./role-template.cfg

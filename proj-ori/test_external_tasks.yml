@@ -1,0 +1,31 @@
+---
+- name: play 1
+  hosts: servera
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    # import_tasks is STATIC. tasks in external file will replace this whole
+    # section before execution
+    - name: import external tasks file
+      import_tasks: tasks/external_tasks.yml
+      vars:
+        username: IMPORT
+
+    # include_tasks is DYNAMIC. you can use loop. the external tasks are
+    # dynamically inserted during runtime.
+    - name: including tasks from external file
+      vars:
+        username: "{{ item }}"
+      include_tasks: tasks/external_tasks.yml
+      loop:
+        - hello world
+        - 12345
+
+    - name: T3
+      debug:
+        msg: Task 3
+
+- import_playbook: test_vars.yml
+...

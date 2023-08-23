@@ -1,0 +1,41 @@
+---
+- name: Installing Software
+  hosts: webservers
+  vars:
+    value1: Hello World
+    user:
+      albert:
+        age: 13
+        gender: m
+  vars_files:
+    - vars/data.yml
+  tasks:
+    - name: Getting xtra_specs from inventory hosts 
+      debug:
+        msg: performing {{ xtra_specs }}
+
+    - name: Install {{ pkg_name }} package
+      debug:
+        msg: Installing {{ pkg_name }}
+      vars:
+        pkg_name: HACKED
+
+    - name: Another example of displaying value using debug module
+      debug:
+        var: pkg_name
+
+    - name: Starting Service
+      debug:
+        msg: "{{ pkg_name }} will be started"
+
+    - name: Display user info
+      debug:
+        msg: >
+          Albert is {{ user.albert.age }} years old
+          with gender = {{ user['albert']['gender'] }}
+...
+
+
+
+
+

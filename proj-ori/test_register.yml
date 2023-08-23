@@ -1,0 +1,16 @@
+---
+- name: play 1
+  hosts: servera
+  tasks:
+    - name: T1
+      command: df -hT
+      register: cmd_result
+
+    #- name: display all fields returned by the module
+    #  debug:
+    #    var: cmd_result
+
+    - name: display header of previous command output
+      debug:
+        msg: The header is "{{ cmd_result.stdout_lines[0] }}"
+...

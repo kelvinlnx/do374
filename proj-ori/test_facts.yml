@@ -1,0 +1,22 @@
+---
+- name: Testing Facts
+  hosts: monkey
+  #gather_facts: false
+  tasks:
+    # anything starting with hash will be treated as comment
+    # ansible_all_ipv4_address[0] is old naming convention
+    # ansible_facts['all_ipv4_address'][0] = ansible_facts.all_ipv4_address[0]
+    # ansible_fqdn = ansible_facts['fqdn'] = ansible_facts.fqdn
+    - name: T1
+      debug:
+        msg: your host ip is {{ ansible_facts['all_ipv4_addresses'][0] }}
+
+    # inventory_hostname is the host name used in the inventory host
+    - name: T2
+      debug:
+        msg: the real name of {{ inventory_hostname }} is  {{ ansible_facts['fqdn'] }}
+
+    - name: T3
+      debug:
+        msg: Task 3
+...

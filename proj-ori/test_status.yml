@@ -1,0 +1,25 @@
+---
+- name: play 1
+  hosts: servera
+  tasks:
+    - name: T1
+      lineinfile:
+        line: Task 1
+        dest: /tmp/dummy
+      register: lif_result
+
+    - name: T2
+      debug:
+        msg: The line in T1 was added to the file
+      when: lif_result.changed
+
+    - name: run a command
+      command: ls -l /home /etc/pas /etc/passwd
+      register: cmd_result
+      changed_when: false
+      #failed_when: false
+      ignore_errors: true
+
+    - debug:
+        var: cmd_result
+...

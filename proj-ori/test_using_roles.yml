@@ -1,0 +1,24 @@
+- name: Using the simple role
+  hosts: servera
+  pre_tasks:
+    - name: Pre 1
+      debug:
+        msg: This is before the role
+  roles:
+    - role: simple
+      username: changed
+      
+    - { role: simple, username: another name }
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: T2
+      debug:
+        msg: Task 2
+
+  post_tasks:
+    - name: Post 1
+      debug:
+        msg: This is AFTER "tasks" the role

@@ -1,0 +1,12 @@
+- name: T2a
+  debug:
+    msg: Username is {{ username }}
+
+- name: T2b
+  debug:
+    msg: Task 2b
+
+- name: T2c
+  debug:
+    msg: Task 2c
+

@@ -1,0 +1,32 @@
+---
+- name: Testing Magic Variable hostvars
+  hosts:
+    - webservers
+    - serverc
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: T2 -> configuring cluster
+      debug:
+        msg: inventory variable xtra_specs = {{ xtra_specs }}
+      ignore_errors: true
+      #when: inventory_hostname in groups['webservers']
+
+    - block:
+        - name: collect facts for serverd
+          setup:
+          delegate_to: serverd        # run module in serverd 
+          delegate_facts: true        # make sure to delegate facts when collecting facts from another machine.
+
+        - name: T3 - configuring master controller
+          debug:
+            msg:
+              - controller ip -> {{ ansible_facts['default_ipv4']['address'] }}
+              - servera -> {{ hostvars['servera']['ansible_facts']['default_ipv4']['address'] }}
+              - serverb -> {{ hostvars.serverb.ansible_facts.default_ipv4.address }}
+              - serverd -> {{ hostvars.serverd.ansible_default_ipv4.address }}
+      when: inventory_hostname == 'serverc'
+      
+...
