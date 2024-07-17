@@ -231,6 +231,7 @@ Playbook Syntax
     hosts: HOST_LIST
     vars: VAR_DICTS
     vars_files: FILE_LIST                 # higher priority over the vars
+    order: inventory|reverse_inventory|sorted|reverse_sorted|shuffle
     become: true|false
     gather_facts: True|false              # when dealing with network devices set to False
     connection: PLUGIN                    # overrides transport in defaults section of ansible.cfg
