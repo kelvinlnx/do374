@@ -261,6 +261,9 @@ Playbook Syntax
         delegate_to: INVENTORY_HOSTNAME   │
         delegate_facts: true|False        │
         tags: TAG_LIST                    │
+        until: CONDITION_LIST             │
+        retries: NUM                      │
+        delay: DELAY_IN_SECONDS           │
         notify: HANDLER_LIST             ╶╯
         listen: HANDLER_NAME              # ONLY used under handlers section
 
