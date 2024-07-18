@@ -1,6 +1,10 @@
 - name: testing tags
   hosts: servera
+  collections:
+    - kelvin.lai
   gather_facts: false
+  roles:
+    - kelvin.lai.simple
   tasks:
     - name: T1 - test
       debug:

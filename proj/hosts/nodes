@@ -1,5 +1,5 @@
-#server[c:d]
-#monkey
-serverc
+server[c:d]
+monkey
+
 [webservers]
 server[a:b]
