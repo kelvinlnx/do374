@@ -1,0 +1,27 @@
+- name: testing tags
+  hosts: servera
+  gather_facts: false
+  tasks:
+    - name: T1 - test
+      debug:
+        msg: Task 1
+      tags:
+        - testing
+
+    - name: T2 - test & prod
+      debug:
+        msg: Task 2
+      tags:
+        - testing
+        - production
+
+    - name: T3 - always
+      debug:
+        msg: Task 3
+      tags:
+        - always
+
+    - name: T4 - notag
+      debug:
+        msg: Task 4
+

@@ -1,0 +1,25 @@
+---
+- name: Testing dynamic hosts groups
+  hosts: '{{ public_host_list | default(my_host_list) }}'
+  vars:
+    my_host_list: servera
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: T2
+      debug:
+        msg: Task 2
+
+    - name: T3
+      debug:
+        msg: Task 3
+
+    - name: add win user
+      vars:
+        item_1: abc
+        abc_data: hello world
+        def_data: hello world
+      debug:
+        msg: Your data is {{ lookup('vars', item_1 + '_data') }}

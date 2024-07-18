@@ -1,0 +1,17 @@
+- name: test loop
+  hosts: servera
+  tasks:
+    - name: T1
+      debug:
+        msg:
+          - abc
+          - def
+          - ghi
+
+    - name: T2
+      debug:
+        msg: "{{ item }}"
+      loop:
+        - abc
+        - def
+        - ghi
