@@ -1,0 +1,16 @@
+- name: testing parallelism and rolling update
+  hosts: all
+  gather_facts: false
+  serial: 4
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: T2
+      command: sleep 5
+      changed_when: false
+
+    - name: T3
+      debug:
+        msg: Task 3

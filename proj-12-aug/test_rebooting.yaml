@@ -1,0 +1,13 @@
+- name: rebooting set of cluster services
+  hosts:
+    - webservers
+    - dbservers
+  become: true
+  tasks:
+    - name: first reboot dbservers
+      reboot:
+      when: inventory_hostname in groups['dbservers']
+
+    - name: then reboot webservers
+      reboot:
+      when: inventory_hostname in groups['webservers']

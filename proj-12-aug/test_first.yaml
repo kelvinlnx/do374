@@ -1,0 +1,14 @@
+- name: testing first playbook
+  hosts: webservers
+  gather_facts: false
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: latest
+      register: yum_result
+      become: true
+
+    - name: result of yum
+      debug:
+        var: yum_result

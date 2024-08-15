@@ -1,0 +1,30 @@
+- name: testing filters
+  hosts: localhost
+  vars:
+    data:
+      - user: albert
+        group: proj_a
+      - user: julie
+    doit: "{{ pub_doit | default(false) }}"
+    value1: 3
+  tasks:
+    - name: T1
+      copy:
+        content: "{{ data | to_nice_yaml }}"
+        dest: dummy
+      when: doit | bool
+
+    - name: T2
+      debug:
+        msg: your animal is {{ value1 | int + 4 }}
+
+    - name: T3
+      debug:
+        msg: second item of data has a group of {{ data[1]['group'] | default('abc') }}
+
+    - name: T4
+      vars:
+        search_item: julie
+        var_julie: hello world
+      debug:
+        msg: your variable named var_{{ search_item }} is {{ lookup('vars', 'var_' + search_item) }}
