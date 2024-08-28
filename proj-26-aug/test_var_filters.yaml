@@ -1,0 +1,37 @@
+- name: Testing variable filters
+  hosts: "{{ pub_host_list }}"
+  vars:
+    pub_host_list: "{{ host_list | default('fish') }}"
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: add/modify user
+      user:
+        name: "{{ item.name }}"
+        shell: "{{ item.shell | default(omit) }}"
+        state: present
+      loop:
+        - name: julie
+        - name: albert
+          shell: /bin/bash
+      become: true
+
+    - name: T3
+      vars:
+        value1: 123
+      debug:
+        msg:
+          - "{{ value1 }} + {{ your_value | default(0) }} is {{ value1 + your_value|int | default(0) }}"
+          - Data is {{ 'A' + your_value }}
+
+
+    - name: list directory
+      shell: ls -l /
+      register: sh_result
+
+    - name: list result
+      debug:
+        msg: "the ls -l contains 'ot':  {{ sh_result.stdout_lines | first | regex_search('ot') }}"
+# {{ 'ot' in sh_result.stdout_lines | first }}

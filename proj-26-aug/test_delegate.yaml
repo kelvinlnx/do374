@@ -1,0 +1,42 @@
+- name: testing delegation
+  hosts: webservers
+  become: true
+  tasks:
+    - name: install apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: enable the webserver
+      service:
+        name: httpd
+        enabled: true
+
+    - name: publish website
+      copy:
+        content: Hello World
+        dest: /var/www/html/index.html
+
+    - name: open firewall port
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+
+    - name: reboot the server
+      reboot: 
+
+    - block:
+        - name: wait for webserver
+          wait_for:
+            host: "{{ inventory_hostname }}"
+            port: 80
+
+        - name: test the webserver
+          uri:
+            url: "http://{{inventory_hostname}}/index.html"
+            method: GET
+          register: uri_result
+          changed_when: uri_result.status == 200 
+      delegate_to: serverc.lab.example.com
+      become: false

@@ -1,0 +1,8 @@
+fish
+server[e:f].lab.example.com
+
+[webservers]
+server[a:b].lab.example.com
+
+[dbservers]
+server[c:d].lab.example.com

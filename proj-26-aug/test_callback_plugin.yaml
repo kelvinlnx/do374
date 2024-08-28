@@ -1,0 +1,6 @@
+- name: testing stdout callback plugins
+  hosts: localhost
+  tasks:
+    - name: display hostvars for servera
+      ansible.builtin.debug:
+        var: hostvars['servera.lab.example.com']

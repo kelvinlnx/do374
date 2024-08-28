@@ -1,0 +1,15 @@
+- name: testing magic vs facts
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: magic vs facts
+      vars:
+        safe_list:
+          - servera.lab.example.com
+          - servere.lab.example.com
+          - fish
+      debug:
+        msg:
+          - inventory_hostname is {{ inventory_hostname }}
+          - ansible_fqdn is {{ ansible_facts['fqdn'] }} 
+      when: inventory_hostname in groups.webservers #safe_list

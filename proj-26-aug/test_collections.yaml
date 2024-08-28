@@ -1,0 +1,22 @@
+- name: testing collections
+  hosts: webservers
+  become: true
+  gather_facts: true
+  tasks:
+    - name: install apache
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: enable and start the webserver
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: open firewall ports
+      ansible.posix.firewalld:
+        service: http
+        state: enabled
+        permanent: true
+        immediate: true
