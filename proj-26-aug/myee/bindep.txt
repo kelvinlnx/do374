@@ -1,0 +1,4 @@
+vim
+hostname
+iproute
+ncurses

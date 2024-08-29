@@ -6,3 +6,7 @@ server[a:b].lab.example.com
 
 [dbservers]
 server[c:d].lab.example.com
+
+[nodes:children]
+webservers
+dbservers

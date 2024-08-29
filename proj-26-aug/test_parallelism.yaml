@@ -1,0 +1,17 @@
+- name: testing serial
+  hosts:
+    - nodes
+    - ungrouped
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+      run_once: true
+
+    - name: T2
+      command: sleep 5
+
+    - name: T3
+      debug:
+        msg: Task 3
+

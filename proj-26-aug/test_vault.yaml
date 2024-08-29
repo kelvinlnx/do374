@@ -1,0 +1,8 @@
+- name: testing vault
+  hosts: servera.lab.example.com
+  vars_files:
+    - vars/data
+  tasks:
+    - name: display info
+      debug:
+        var: user_info

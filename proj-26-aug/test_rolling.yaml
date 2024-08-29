@@ -1,0 +1,19 @@
+- name: testing serial
+  hosts:
+    - nodes
+    - ungrouped
+  serial: 2
+  #max_fail_percentage: 49%
+  tasks:
+    - name: T1
+      debug:
+        msg: Task 1
+
+    - name: T2
+      command: sleep 5
+      failed_when: inventory_hostname in groups.dbservers
+
+    - name: T3
+      debug:
+        msg: Task 3
+
