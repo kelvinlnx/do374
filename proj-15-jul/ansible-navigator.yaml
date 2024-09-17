@@ -1,9 +1,0 @@
-ansible-navigator:
-  execution-environment:
-    image: hub.lab.example.com/ee-supported-rhel8
-    container-engine: podman
-  mode: stdout
-  logging:
-    file: logs/ansible-navigator.log
-  playbook-artifact:
-    enable: false

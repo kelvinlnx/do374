@@ -1,7 +1,0 @@
-- name: testing templates
-  hosts: serverc
-  tasks:
-    - name: copy template
-      template:
-        src: ./templates/config.j2
-        dest: /tmp/dummy

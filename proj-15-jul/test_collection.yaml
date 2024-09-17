@@ -1,4 +1,0 @@
-- name: testing collection
-  hosts: localhost
-  roles:
-    - kelvin.lai.simple

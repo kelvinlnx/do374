@@ -1,7 +1,0 @@
-- name: testing boolean
-  hosts: localhost
-  tasks:
-    - name: testing boolean
-      debug:
-        msg: OH YES
-      when: flag | bool
