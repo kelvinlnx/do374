@@ -1,0 +1,31 @@
+- name: Testing privilege escalation
+  hosts: webservers
+  # become: true
+  # roles:
+  #   - role: setup_vm
+  #     become: true
+  tasks:
+    - block: 
+        - name: Install apache webserver
+          yum:
+            name: httpd
+            state: latest
+    
+        - name: Publish website
+          copy:
+            content: "Welcome to {{ inventory_hostname }}!"
+            dest: /var/www/html/index.html
+    
+        - name: Start the service
+          service:
+            name: httpd
+            state: started
+            enabled: true
+      become: true
+
+    - name: Open firewall port
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+      become: true

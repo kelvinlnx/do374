@@ -1,0 +1,18 @@
+- name: testing delegation
+  hosts: servera.lab.example.com
+  gather_facts: true
+  tasks:
+    - name: get facts for serverb
+      setup:
+      delegate_to: serverb.lab.example.com
+      delegate_facts: true
+
+      #- name: show hostvars
+      #  debug:
+      #    var: hostvars
+
+    - name: where are you?
+      debug:
+        msg:
+          - servera ip is {{ ansible_facts['eth0']['ipv4']['address'] }}
+          - serverb ip is {{ hostvars['serverb.lab.example.com']['ansible_facts']['eth0']['ipv4']['address'] }}

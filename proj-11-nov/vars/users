@@ -1,0 +1,26 @@
+g_users:
+  - name: albert
+    products:
+      - accounts
+      - operations
+      - sales
+
+  - name: julie
+    shell: /bin/ksh
+    products:
+      - sales
+
+# g_users[0]['name'] == albert
+
+# g_users:
+#   albert:
+#     products:
+#       - accounts
+#       - operations
+#       - sale
+#   julie:
+#     products:
+#       - sales
+#     shell: /bin/ksh
+#
+# g_users['albert']

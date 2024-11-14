@@ -1,0 +1,23 @@
+- name: testing delegation
+  hosts: servera.lab.example.com
+  tasks:
+    - name: get my hostname
+      command: hostname
+      register: cmd_result
+
+    - name: where are you?
+      debug:
+        msg: you are in {{ cmd_result.stdout }}
+
+    - name: going to serverb
+      command: hostname
+      register: cmd_result
+      delegate_to: "{{ item }}"
+      loop:
+        - serverb.lab.example.com
+        - serverc.lab.example.com
+
+    - name: where were you in the 3rd task?
+      debug:
+        msg: you were in {{ item.stdout }}
+      loop: "{{ cmd_result.results }}"
